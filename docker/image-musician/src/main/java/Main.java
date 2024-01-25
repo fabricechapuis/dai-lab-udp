@@ -27,19 +27,19 @@ class Main {
 
         uuid = UUID.randomUUID().toString();
 
+        String json = createJson();
+        byte[] buffer = json.getBytes();
+
         try {
             InetAddress group = InetAddress.getByName("224.0.0.1");
             int port = 9904;
-
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, port);
+            DatagramSocket socket = new DatagramSocket();
             while (true) {
-                String json = createJson();
-                byte[] buffer = json.getBytes();
-
                 System.out.println("Sending " + json);
-                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, port);
-                DatagramSocket socket = new DatagramSocket();
-                System.out.println("packet sent");
+                socket = new DatagramSocket();
                 socket.send(packet);
+                System.out.println("packet sent");
 
                 Thread.sleep(Duration.ofSeconds(1));
             }
