@@ -59,9 +59,8 @@ class Main {
 
     private static String createJson() {
         Map<String, String> jsonMap = new HashMap<String, String>();
-        jsonMap.put("instrument", instrument);
-        jsonMap.put("sound", sound);
         jsonMap.put("uuid", uuid);
+        jsonMap.put("sound", sound);
 
         Gson gson = new Gson();
         return gson.toJson(jsonMap);
