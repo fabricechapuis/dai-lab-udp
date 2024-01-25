@@ -1,4 +1,5 @@
 import java.net.*;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -40,7 +41,7 @@ class Main {
                 System.out.println("packet sent");
                 socket.send(packet);
 
-                Thread.sleep(1000);
+                Thread.sleep(Duration.ofSeconds(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
