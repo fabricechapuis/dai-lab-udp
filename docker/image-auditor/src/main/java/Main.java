@@ -34,16 +34,10 @@ public class Main {
             e.printStackTrace();
         }};
 
-        Runnable ActiveMusiciansupdater = () -> {runActiveMusiciansUpdater(sharedData);};
-
         Thread.startVirtualThread(UDPListener);
         Thread.startVirtualThread(TCPListener);
-        Thread.startVirtualThread(ActiveMusiciansupdater);
-        try {
-            Thread.sleep(Duration.ofSeconds(100));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        runActiveMusiciansUpdater(sharedData);
+
     }
     
     private static void runUDPListener(int port, InetAddress group, SharedData sharedData) {
