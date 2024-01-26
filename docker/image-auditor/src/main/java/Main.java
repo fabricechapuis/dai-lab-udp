@@ -99,13 +99,13 @@ public class Main {
             System.out.println("TCPListener Listening on port " + port);
             while (true) {
                 ServerSocket serverSocket = new ServerSocket(port);
+                Socket socket = serverSocket.accept();
                 ArrayList<Map<String, String>> musicians = new ArrayList<Map<String, String>>();
                 for (Musician musician : sharedData.sharedMusicians) {
                     if (musician.isActive()) {
                         musicians.add(musician.toMap());
                     }
                 }
-                Socket socket = serverSocket.accept();
                 System.out.println("Connection established");
                 var out = new BufferedOutputStream(socket.getOutputStream());
                 Gson gson = new Gson();
