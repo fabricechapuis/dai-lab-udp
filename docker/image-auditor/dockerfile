@@ -1,0 +1,9 @@
+FROM openjdk:21
+RUN mkdir -p app
+
+ARG JAR_FILE=target/dai-lab-udp-1.0.0.jar
+ADD ${JAR_FILE} app/Auditor.jar
+
+EXPOSE 2205
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app/Auditor.jar"]
