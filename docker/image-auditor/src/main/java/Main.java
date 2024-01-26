@@ -26,8 +26,7 @@ public class Main {
         int TCPPort = 2205;
         InetAddress group = InetAddress.getByName("224.0.0.1");
         SharedData sharedData = new SharedData();
-        
-        // Executor executor = Executors.newVirtualThreadPerTaskExecutor();
+
         Runnable UDPListener = () -> {runUDPListener(UDPPort, group, sharedData);};
 
         Runnable TCPListener = () -> {try {
