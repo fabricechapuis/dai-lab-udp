@@ -48,7 +48,7 @@ public class Musician {
         Map<String, String> map = new HashMap<String, String>();
         map.put("uuid", this.uuid);
         map.put("instrument", this.instrument);
-        map.put("lastActivity", this.lastUpdate.toString());
+        map.put("lastActivity", String.valueOf(this.lastUpdate.getTime()));
         return map;
     }
 }

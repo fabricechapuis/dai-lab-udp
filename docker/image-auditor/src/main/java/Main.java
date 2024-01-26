@@ -51,14 +51,19 @@ public class Main {
     private static void runUDPListener(int port, InetAddress group, SharedData sharedData) {
         try {
             System.out.println("UDPListner Listening on port " + port);
-            MulticastSocket socket = new MulticastSocket(port);
-            socket.joinGroup(new InetSocketAddress(group, port), NetworkInterface.getByInetAddress(InetAddress.getLocalHost()));
+            
             while (true) {
+                MulticastSocket socket = new MulticastSocket(port);
+                socket.joinGroup(new InetSocketAddress(group, port), NetworkInterface.getByInetAddress(InetAddress.getLocalHost()));
+
                 byte[] buffer = new byte[1024];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+
                 socket.receive(packet);
+
                 String message = new String(packet.getData(), 0, packet.getLength());
                 System.out.println("Received message: " + message);
+                
                 Map<String, String> map = new Gson().fromJson(message, new TypeToken<Map<String, String>>(){}.getType());
                 
                 if (!isMusicianAlreadyStored(sharedData, map)) {
@@ -71,6 +76,7 @@ public class Main {
                         }
                     }
                 }
+                socket.close();
             }
         } catch (SocketException e) {
             e.printStackTrace();
@@ -121,7 +127,7 @@ public class Main {
                 }
             }
             try {
-                Thread.sleep(Duration.ofSeconds(1));
+                Thread.sleep(Duration.ofMillis(100));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
