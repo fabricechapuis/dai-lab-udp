@@ -13,7 +13,7 @@ public class Musician {
         put("boum-boum", "drum");
     }};
     private String instrument;
-    private Timestamp lastUpdate;
+    private Date lastUpdate;
     private boolean isActive = true;
 
     Musician(String uuid, String sound) {
@@ -25,8 +25,12 @@ public class Musician {
         this.updateTimeStamp();
     }
 
+    Date getLastUpdate() {
+        return this.lastUpdate;
+    }
+
     void updateTimeStamp() {
-        this.lastUpdate = new Timestamp(new Date().getTime());
+        this.lastUpdate = new Date();
     }
 
     boolean isActive() {

@@ -5,8 +5,10 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
@@ -34,8 +36,11 @@ public class Main {
             e.printStackTrace();
         }};
 
+        Runnable ActiveMusiciansupdater = () -> {runActiveMusiciansUpdater(sharedData);};
+
         Thread.startVirtualThread(UDPListener);
         Thread.startVirtualThread(TCPListener);
+        Thread.startVirtualThread(ActiveMusiciansupdater);
         try {
             Thread.sleep(Duration.ofSeconds(100));
         } catch (InterruptedException e) {
@@ -62,6 +67,7 @@ public class Main {
                     for (Musician musician : sharedData.sharedMusicians) {
                         if (musician.getUuid().equals(map.get("uuid"))) {
                             musician.updateTimeStamp();
+                            musician.setActive(true);
                         }
                     }
                 }
@@ -98,10 +104,27 @@ public class Main {
                 Gson gson = new Gson();
                 out.write(gson.toJson(musicians).getBytes(StandardCharsets.UTF_8));
                 out.flush();
+                musicians.clear();
                 socket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    private static void runActiveMusiciansUpdater(SharedData sharedData) {
+        while (true) {
+            for (Musician musician : sharedData.sharedMusicians) {
+                long timeDiff = new Date().getTime() - musician.getLastUpdate().getTime();
+                System.out.println("Time diff: " + timeDiff);
+                if (timeDiff > 5000) { // 5 seconds
+                    musician.setActive(false);
+                }
+            }
+            try {
+                Thread.sleep(Duration.ofSeconds(1));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
