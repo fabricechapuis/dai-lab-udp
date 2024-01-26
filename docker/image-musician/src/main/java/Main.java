@@ -1,4 +1,5 @@
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,18 +32,18 @@ class Main {
         uuid = UUID.randomUUID().toString();
 
         String json = createJson();
-        byte[] buffer = json.getBytes();
+        byte[] buffer = json.getBytes(StandardCharsets.UTF_8);
+        InetSocketAddress destinationAddress = new InetSocketAddress(ipAddress, port);
 
         try {
-            InetAddress group = InetAddress.getByName(ipAddress);
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, port);
-            DatagramSocket socket = new DatagramSocket();
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, destinationAddress);
             while (true) {
+                DatagramSocket socket = new DatagramSocket();
                 System.out.println("Sending " + json);
-                socket = new DatagramSocket();
                 socket.send(packet);
                 System.out.println("packet sent");
-
+                socket.close();
+                
                 Thread.sleep(Duration.ofSeconds(1));
             }
         } catch (Exception e) {
