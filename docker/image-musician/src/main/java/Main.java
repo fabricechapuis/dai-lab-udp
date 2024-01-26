@@ -12,6 +12,9 @@ class Main {
     static String uuid;
 
     public static void main(String[] args) {
+        int port = 9904;
+        String ipAddress = "224.0.0.1";
+        
         if (args.length != 1) {
             throw new IllegalArgumentException("We need exactly one argument");
         }
@@ -31,8 +34,7 @@ class Main {
         byte[] buffer = json.getBytes();
 
         try {
-            InetAddress group = InetAddress.getByName("224.0.0.1");
-            int port = 9904;
+            InetAddress group = InetAddress.getByName(ipAddress);
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, group, port);
             DatagramSocket socket = new DatagramSocket();
             while (true) {
