@@ -51,10 +51,12 @@ public class Main {
     private static void runUDPListener(int port, InetAddress group, SharedData sharedData) {
         try {
             System.out.println("UDPListner Listening on port " + port);
+            InetSocketAddress groupAddress = new InetSocketAddress(group, port);
+            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
             
             while (true) {
                 MulticastSocket socket = new MulticastSocket(port);
-                socket.joinGroup(new InetSocketAddress(group, port), NetworkInterface.getByInetAddress(InetAddress.getLocalHost()));
+                socket.joinGroup(groupAddress, networkInterface);
 
                 byte[] buffer = new byte[1024];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
@@ -76,6 +78,7 @@ public class Main {
                         }
                     }
                 }
+                socket.leaveGroup(groupAddress, networkInterface);
                 socket.close();
             }
         } catch (SocketException e) {
@@ -96,8 +99,8 @@ public class Main {
     private static void TCPListener(int port, SharedData sharedData) throws InterruptedException {
         try {
             System.out.println("TCPListener Listening on port " + port);
-            ServerSocket serverSocket = new ServerSocket(port);
             while (true) {
+                ServerSocket serverSocket = new ServerSocket(port);
                 ArrayList<Map<String, String>> musicians = new ArrayList<Map<String, String>>();
                 for (Musician musician : sharedData.sharedMusicians) {
                     if (musician.isActive()) {
@@ -112,6 +115,7 @@ public class Main {
                 out.flush();
                 musicians.clear();
                 socket.close();
+                serverSocket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
