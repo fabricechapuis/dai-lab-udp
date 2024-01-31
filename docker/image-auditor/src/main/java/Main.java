@@ -122,11 +122,6 @@ public class Main {
                     musician.setActive(false);
                 }
             }
-            try {
-                Thread.sleep(Duration.ofMillis(100));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
