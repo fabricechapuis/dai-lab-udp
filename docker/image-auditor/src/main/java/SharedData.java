@@ -1,5 +1,5 @@
-import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class SharedData {
-    public volatile ArrayList<Musician> sharedMusicians = new ArrayList<Musician>();
+    public volatile ConcurrentLinkedQueue<Musician> sharedMusicians = new ConcurrentLinkedQueue<Musician>();
 }

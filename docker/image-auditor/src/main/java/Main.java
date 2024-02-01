@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -28,14 +27,14 @@ public class Main {
 
         Runnable UDPListener = () -> {runUDPListener(UDPPort, group, sharedData);};
 
-        Runnable TCPListener = () -> {try {
-            TCPListener(TCPPort, sharedData);
+        Runnable TCPSender = () -> {try {
+            TCPSender(TCPPort, sharedData);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }};
 
         Thread.startVirtualThread(UDPListener);
-        Thread.startVirtualThread(TCPListener);
+        Thread.startVirtualThread(TCPSender);
         runActiveMusiciansUpdater(sharedData);
 
     }
@@ -88,9 +87,9 @@ public class Main {
         return false;
     }
 
-    private static void TCPListener(int port, SharedData sharedData) throws InterruptedException {
+    private static void TCPSender(int port, SharedData sharedData) throws InterruptedException {
         try {
-            System.out.println("TCPListener Listening on port " + port);
+            System.out.println("TCPSender Listening on port " + port);
             while (true) {
                 ServerSocket serverSocket = new ServerSocket(port);
                 Socket socket = serverSocket.accept();
@@ -113,11 +112,11 @@ public class Main {
             e.printStackTrace();
         }
     }
+
     private static void runActiveMusiciansUpdater(SharedData sharedData) {
         while (true) {
             for (Musician musician : sharedData.sharedMusicians) {
                 long timeDiff = new Date().getTime() - musician.getLastUpdate().getTime();
-                System.out.println("Time diff: " + timeDiff);
                 if (timeDiff > 5000) { // 5 seconds
                     musician.setActive(false);
                 }
