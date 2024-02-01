@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -118,7 +117,6 @@ public class Main {
         while (true) {
             for (Musician musician : sharedData.sharedMusicians) {
                 long timeDiff = new Date().getTime() - musician.getLastUpdate().getTime();
-                System.out.println("Time diff: " + timeDiff);
                 if (timeDiff > 5000) { // 5 seconds
                     musician.setActive(false);
                 }
