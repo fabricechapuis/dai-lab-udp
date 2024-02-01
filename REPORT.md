@@ -46,3 +46,6 @@ Le TCP contiendra un payload au format JSON comme suit:
 qui contiendra chaque instrument décrit par son nom et son uuid.
 ##### Exemple de dialogue
 ![](assets/TCP_protocol.drawio.png)
+
+## Les Tests
+En effectuant les tests, nous avons vu que tout passait, mais une fois sur 2. Nous pensons que la raison doit être au niveau du timing du thread qui met à jour les musicians actifs, avec le timing du assert dans le test. C'est la seule chose qui pourrait expliquer un tel comportement. Nous avons aussi retiré quelques petites choses qui pourrait nuire à ce test, comme le fait de print la différence entre le timestamp actuel et le timestamp de la dernière mise à jour du musician, qui devait ralentir le thread, et un sleep qui était mis initialement au thread principal qui vérifiait l'activité des musiciens.
