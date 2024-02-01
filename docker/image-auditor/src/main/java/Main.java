@@ -113,6 +113,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+    // Modifier ceci pour utiliser une ConcurrentLinkedQueue au lieu de l'array.
     private static void runActiveMusiciansUpdater(SharedData sharedData) {
         while (true) {
             for (Musician musician : sharedData.sharedMusicians) {
