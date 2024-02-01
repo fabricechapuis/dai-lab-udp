@@ -16,19 +16,23 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Main {
+    static final String MULTICAST_ADDRESS = "224.0.0.1";
+
+    static final int UDPPORT = 9904;
+    static final int TCPPORT = 2205;
+
     public static void main(String[] args) throws IOException {
         if (args.length != 0) {
             throw new IllegalArgumentException("No arguments expected");
         }
-        int UDPPort = 9904;
-        int TCPPort = 2205;
-        InetAddress group = InetAddress.getByName("224.0.0.1");
+        
+        InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
         SharedData sharedData = new SharedData();
 
-        Runnable UDPListener = () -> {runUDPListener(UDPPort, group, sharedData);};
+        Runnable UDPListener = () -> {runUDPListener(UDPPORT, group, sharedData);};
 
         Runnable TCPSender = () -> {try {
-            TCPSender(TCPPort, sharedData);
+            TCPSender(TCPPORT, sharedData);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }};
