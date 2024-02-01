@@ -1,0 +1,43 @@
+origin	git@github.com:fabricechapuis/dai-lab-udp.git (fetch)
+origin	git@github.com:fabricechapuis/dai-lab-udp.git (push)
+Starting container dai/musician: "4d6a8b2847fa446099c1dd1ad44d10b25c583e432036cce862e449c4a6667ff9"
+Starting container dai/musician: "63b321623d0ec2b87062dc21d9136a99f41beec061db36441b04ba66648ade5b"
+Starting container dai/musician: "da2eed48d34bb412e7df5d9b115ea963e8871aeda8b85d7b7fd84786701c4b9b"
+Starting container dai/musician: "c4e93bfe055ed72a6490e5ae7d266ecc86cb1f2ec321563138e032ebac756bd1"
+Starting container dai/musician: "6b5f923a89e100a6773a7e8778b2e40af4d6a40287b5a4be677f9254e2f717de"
+Starting container dai/musician: "e113b01a9e96d00205a5c5c52095037e771ab9a325f15946f04ee3f516ad46f8"
+Starting container dai/musician: "74d373a62e0be2ed0b9e097e2b5be5e53f668063c9864fccaf9267a93f2decfe"
+Starting container dai/musician: "161d885e149f0cf1621f378d033bba8d8686ee8918cdac5429372b101d359dbd"
+Starting container dai/auditor: "93ea91dd6169a641a2aebf0946840dc7ffccc150e868b2b5d22f32531d1d6291"
+Starting container dai/musician: "95260a57f075247d6af04713034185c7fb9b07c0eb60347970ae5f5923ca12e9"
+Starting container dai/musician: "bbeda7e716f5e2b69decea9244e5fc60ae27d82cbdf2cb4b9f20d59906f348be"
+11 containers have been started.
+da2eed48d34bb412e7df5d9b115ea963e8871aeda8b85d7b7fd84786701c4b9b : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,flute
+6b5f923a89e100a6773a7e8778b2e40af4d6a40287b5a4be677f9254e2f717de : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,drum
+95260a57f075247d6af04713034185c7fb9b07c0eb60347970ae5f5923ca12e9 : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,piano
+63b321623d0ec2b87062dc21d9136a99f41beec061db36441b04ba66648ade5b : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,violin
+4d6a8b2847fa446099c1dd1ad44d10b25c583e432036cce862e449c4a6667ff9 : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,trumpet
+c4e93bfe055ed72a6490e5ae7d266ecc86cb1f2ec321563138e032ebac756bd1 : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,flute
+161d885e149f0cf1621f378d033bba8d8686ee8918cdac5429372b101d359dbd : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,violin
+e113b01a9e96d00205a5c5c52095037e771ab9a325f15946f04ee3f516ad46f8 : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,drum
+bbeda7e716f5e2b69decea9244e5fc60ae27d82cbdf2cb4b9f20d59906f348be : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,trumpet
+74d373a62e0be2ed0b9e097e2b5be5e53f668063c9864fccaf9267a93f2decfe : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Musician.jar,flute
+93ea91dd6169a641a2aebf0946840dc7ffccc150e868b2b5d22f32531d1d6291 : java -Djava.security.egd=file:/dev/./urandom,-jar,app/Auditor.jar
+Auditor validation: success: ["drum","drum","flute","flute","flute","piano","trumpet","trumpet","violin","violin"]
+There are 10 musicians, let's kill one
+killed 63b321623d0ec2b87062dc21d9136a99f41beec061db36441b04ba66648ade5b
+Auditor validation: success: ["drum","drum","flute","flute","flute","piano","trumpet","trumpet","violin"]
+Scheduling a new test
+There are 9 musicians, let's kill one
+killed 161d885e149f0cf1621f378d033bba8d8686ee8918cdac5429372b101d359dbd
+Auditor validation: success: ["drum","drum","flute","flute","flute","piano","trumpet","trumpet"]
+Scheduling a new test
+There are 8 musicians, let's kill one
+killed 4d6a8b2847fa446099c1dd1ad44d10b25c583e432036cce862e449c4a6667ff9
+Auditor validation: success: ["drum","drum","flute","flute","flute","piano","trumpet"]
+Scheduling a new test
+There are 7 musicians, let's kill one
+killed 74d373a62e0be2ed0b9e097e2b5be5e53f668063c9864fccaf9267a93f2decfe
+Auditor validation: success: ["drum","drum","flute","flute","piano","trumpet"]
+Scheduling a new test
+We have done all tests.
