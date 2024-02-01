@@ -12,10 +12,10 @@ class Main {
     static String sound;
     static String uuid;
 
+    final static int PORT = 9904;
+    final static String IPADDRESS = "224.0.0.1";
+
     public static void main(String[] args) {
-        int port = 9904;
-        String ipAddress = "224.0.0.1";
-        
         if (args.length != 1) {
             throw new IllegalArgumentException("We need exactly one argument");
         }
@@ -33,7 +33,7 @@ class Main {
 
         String json = createJson();
         byte[] buffer = json.getBytes(StandardCharsets.UTF_8);
-        InetSocketAddress destinationAddress = new InetSocketAddress(ipAddress, port);
+        InetSocketAddress destinationAddress = new InetSocketAddress(IPADDRESS, PORT);
 
         try {
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, destinationAddress);
