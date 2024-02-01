@@ -28,14 +28,14 @@ public class Main {
 
         Runnable UDPListener = () -> {runUDPListener(UDPPort, group, sharedData);};
 
-        Runnable TCPListener = () -> {try {
-            TCPListener(TCPPort, sharedData);
+        Runnable TCPSender = () -> {try {
+            TCPSender(TCPPort, sharedData);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }};
 
         Thread.startVirtualThread(UDPListener);
-        Thread.startVirtualThread(TCPListener);
+        Thread.startVirtualThread(TCPSender);
         runActiveMusiciansUpdater(sharedData);
 
     }
@@ -88,9 +88,9 @@ public class Main {
         return false;
     }
 
-    private static void TCPListener(int port, SharedData sharedData) throws InterruptedException {
+    private static void TCPSender(int port, SharedData sharedData) throws InterruptedException {
         try {
-            System.out.println("TCPListener Listening on port " + port);
+            System.out.println("TCPSender Listening on port " + port);
             while (true) {
                 ServerSocket serverSocket = new ServerSocket(port);
                 Socket socket = serverSocket.accept();
@@ -113,7 +113,7 @@ public class Main {
             e.printStackTrace();
         }
     }
-    // Modifier ceci pour utiliser une ConcurrentLinkedQueue au lieu de l'array.
+
     private static void runActiveMusiciansUpdater(SharedData sharedData) {
         while (true) {
             for (Musician musician : sharedData.sharedMusicians) {
