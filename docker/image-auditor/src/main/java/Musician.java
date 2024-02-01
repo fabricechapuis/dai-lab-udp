@@ -11,7 +11,7 @@ public class Musician {
         put("gzi-gzi", "violin");
         put("boum-boum", "drum");
     }};
-    private String instrument;
+    final private String instrument;
     private Date lastUpdate;
     private boolean isActive = true;
 
